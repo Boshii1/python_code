@@ -1,0 +1,35 @@
+# Basic code for reading values from a CSV file and executing a copy function on all files with the document type
+
+import pandas as pd
+import shutil
+
+# this code is being utilized in a recorder's office where the organization of file 
+# is separated between data timestamps such as: year -> month -> day 
+# Each CSV has the docuemnt type within the TIFFs
+# Need to hop through those directories to get the daily report
+
+# locate within the directory for the specific year 
+
+# locate the month needed
+
+# locate the day 
+
+# read from the specific CSV
+data = pd.read_csv("testbook.csv")
+
+#  set file_types to search key values 
+file_types = ['Deeds', 'PCORS', 'AFF'] 
+
+# filter the rows where the 'Type' of the document contains the file_types values
+filtered_data = data[data['Type'].isin(file_types)]
+
+# create a variable with the file path of the destination folder 
+copy_folder = r"file_path"
+
+# iterate through the rows in the filtered_data 
+# have to verify how the file storage are set for the TIFFs, since I believe from testing 
+# the test files may be in the same directory as the CSV. Possibility of being able to search thru a folder
+# to copy the files from, since the fiels are stored in notated folders 
+# lookup process may look like 
+# 1. read the date to go the corresponding folder 
+# read 
