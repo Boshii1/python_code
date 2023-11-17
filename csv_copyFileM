@@ -1,13 +1,16 @@
 # Basic code for reading values from a CSV file and executing a copy function on all files with the document type
-
 import pandas as pd
 import shutil
+import os.path
+from datetime import datetime 
 
-# this code is being utilized in a recorder's office where the organization of file 
-# is separated between data timestamps such as: year -> month -> day 
-# Each CSV has the docuemnt type within the TIFFs
-# Need to hop through those directories to get the daily report
+# store the datetime variable to use 
+now = datetime.now()
 
+# set each specific date valeu as its own variable 
+curr_day = now.day()
+curr_month = (now.month() + ' ' + now.strftime('%B'))
+curr_year = now.year()
 # locate within the directory for the specific year 
 
 # locate the month needed

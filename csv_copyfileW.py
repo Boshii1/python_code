@@ -43,7 +43,7 @@ except Exception as e:
 file_types = ['Deeds', 'PCORS', 'Affidavit']
 
 # filter the rows where the column 'Type' is in file_types 
-# filtered_data = data[data['Type'].isin(file_types)]
+filtered_data = data[data['Type'].isin(file_types)]
 
 # print table of filtered rows 
 # print(filtered_data)
