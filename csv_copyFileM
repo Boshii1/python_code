@@ -32,4 +32,4 @@ copy_folder = r"file_path"
 # to copy the files from, since the fiels are stored in notated folders 
 # lookup process may look like 
 # 1. read the date to go the corresponding folder 
-# read 
+# looking at the shutil module it states that you can set the src and dst 

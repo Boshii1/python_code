@@ -3,21 +3,21 @@ import shutil
 import os.path
 from datetime import datetime 
 
+# store the date as a global variable 
+now = datetime.now()
 
 #store the date values into separate variables 
-curr_day = str(datetime.now().day)
-curr_month = str(datetime.now().month)
-curr_year = str(datetime.now().year)
+curr_day = now.day()
+curr_month = (now.month() + ' ' + now.strftime('%B'))
+curr_year = now.year()
 
-now = datetime.today()
-curr_month2 = (now.month, now.strftime("%B"))
-print("Current month:", curr_month2)
+print("Current month:", curr_month)
 
 curr_date = datetime.today().strftime('%m-%d-%Y')
 print("This is the current date:" + curr_date)
 
 # create a directory path with the date variables 
-dir_path = os.path.join(r'C:\Users\nyoshida\Documents\python_code',curr_year,curr_month2,curr_day) 
+dir_path = os.path.join(r'C:\Users\nyoshida\Documents\python_code',curr_year,curr_month,curr_day) 
 print(dir_path)
 
 # create a file name for the csv file using the curr_date variable 
