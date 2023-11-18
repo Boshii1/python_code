@@ -24,11 +24,12 @@ curr_day = now.day
 print(curr_day)
 
 # create the directory path for the csv files
-csv_dirPath = 'CTY-MEGABYTE-SQLtiffimagesNewDeeds'
+csv_dirPath = os.path.join(r"C:\Users\nyoshida\Documents\python_code\")
 print(csv_dirPath)
 
 # create the filename of the csv using the curr_date variable 
-csv_fileName = curr_date + '.csv' 
+# csv_fileName = curr_date + '.csv' 
+csv_fileNameTest = 'testbook.csv'
 print (csv_fileName)
 
 # create the filepath by using os.path.join to create the path from csv_dirPath and csv_fileName
@@ -57,9 +58,14 @@ filtered_data = data[data['Document' + ' ' + 'Code'].isin(file_types)]
 print(filtered_data)
 
 # create a variable with the file path of the folder containing the copies
-# copy_folder = destination folder
+copy_folder = r"C:\Users\nyoshida\Documents\python_code\copy_zone"
 
 # iterate through the rows in the filtered_data dataframe 
 for index, row in filtered_data.iterrows(): 
     # store the names of the filtered files into tiff_fileName by using the 'Document Code' column
     tiff_fileName = row["Instrument Number"]
+    try:
+        shutil.copy(file_name, copy_folder)
+        print(f'Successfully copied {tiff_fileName} to {copy_folder}')
+    except Exception as e:
+        print(f'Failed to copy {tiff_fileName} to {copy_folder}. Error: {e}')
