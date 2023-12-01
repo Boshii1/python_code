@@ -1,4 +1,4 @@
-# Creeated: by Naotoshi Yoshida
+# Created: by Naotoshi Yoshida
 # Modified date : 11-17-2023
 # Description: To read a .csv file to find documents that meet a certain criteria that will initiate a copy 
 # and store them into a new folder. The program will be able to navigate thru the file directory to pull the corerct files
@@ -6,7 +6,6 @@
 import pandas as pd 
 import shutil
 import os.path
-import re
 from datetime import datetime 
 
 now = datetime.today()
@@ -24,20 +23,19 @@ curr_day = str(now.day)
 print(curr_day)
 
 # create the directory path for the csv files
-csv_dirPath = os.path.join(r'C:\Users\nyoshida\Documents\python_code') 
+csv_dirPath = os.path.join(r'\\CTY-MEGABYTE-SQL\tiffimages\NewDeeds') 
 print(csv_dirPath)
 
 # create the filename of the csv using the curr_date variable 
 # csv_fileName = curr_date + '.csv' 
-csv_fileNameTest = 'testbook.csv'
-print (csv_fileNameTest)
+csv_fileNameTest = curr_date + '.csv'
+print(csv_fileNameTest)
 
 # create the filepath by using os.path.join to create the path from csv_dirPath and csv_fileName
 csv_filePath = os.path.join(csv_dirPath, csv_fileNameTest)
 print(csv_filePath)
 
 # to read from the csv we need to use the pd.read_csv method 
-
 # create a check to read data from csv 
 try: 
     data = pd.read_csv(csv_filePath)
@@ -62,13 +60,13 @@ filtered_data = data[data['Document' + ' ' + 'Code'].isin(file_types)]
 print(filtered_data)
 
 # create a variable with the file path of the folder containing the copies
-copy_folder = r'C:\Users\nyoshida\Documents\python_code\copy_zone'
+copy_folder = r'C:\Deeds_for_JA'
 
 # iterate through the rows in the filtered_data dataframe 
 for index, row in filtered_data.iterrows(): 
     
     # store the names of the file while iterating through the rows while the path is set 
-    source_tiffFile = os.path.join(r"C:\Users\nyoshida\Documents\python_code",curr_year,curr_month,curr_day,row['Instrument Number'] + ".txt") 
+    source_tiffFile = os.path.join(r'\\CTY-MEGABYTE-SQL\tiffimages\NewDeeds',curr_year,curr_month,curr_day,row['Instrument Number'] + '.txt') 
     print(source_tiffFile)
     try:
         shutil.copy(source_tiffFile, copy_folder)
