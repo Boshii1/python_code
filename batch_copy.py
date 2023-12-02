@@ -28,10 +28,10 @@ copy_folder = r'C:\Deeds_for_JA'
 # Goal: is to pass a date value through this
 # will extrapolate further the date format, year, month, and day
 def get_date(input):
-    date = input.strftime('%m-%d-%Y')
+    date = input.strftime("%m-%d-%Y")
     year = str(input.year)
-    month = str(input.month)
-    day = str(input.day)
+    month = input.strftime("%m")
+    day = input.strftime("%d")
     return date, year, month, day
 
 # Function date_range returns the days 
@@ -79,11 +79,23 @@ for single_date in date_range(start_date, end_date):
         
         # store the names of the file while iterating through the rows while the path is set 
         # may be able to separate the folder and text file rather than having to encase the file into one file path
-        specific_tif = os.path.join(source_directory,curr_year,curr_month,curr_day,row['Instrument Number'])
-        source_tifFile = glob.glob(os.path.join(source_directory,curr_year,curr_month,curr_day,specific_tif + '*.txt'))
-        print(source_tifFile)
-        try:
-            shutil.copy(source_tifFile, copy_folder)
-            print(f'Successfully copied {source_tifFile} to {copy_folder}')
-        except Exception as e:
-            print(f'Failed to copy {source_tifFile} to {copy_folder}. Error: {e}')
+        tif_folder = os.path.join(source_directory,curr_year,curr_month,curr_day)
+        print(tif_folder)
+        tif = str(row['Instrument Number'] + '-')
+        print(tif)
+        # Testing whether the directory exists or not and shows how many files were matched with the glob.glob 
+        print("Start TEST")
+        print(f"tif_folder exists: {os.path.exists(tif_folder)}")
+        print(f"tif_folder is a directory: {os.path.isdir(tif_folder)}")
+        file_list = glob.glob(os.path.join(tif_folder, f'{tif}*.tif'))
+        print(f"Number of matched files: {len(file_list)}")
+        
+        # this will go through the list and copy them to the Deeds_for_JA
+        tif_file = glob.glob(os.path.join(tif_folder, f'{tif}*.tif'), recursive=True)
+        for filename in tif_file: 
+            print(filename)
+            try:
+                shutil.copy(filename, copy_folder)
+                print(f'Successfully copied {filename} to {copy_folder}')
+            except Exception as e:
+                print(f'Failed to copy {filename} to {copy_folder}. Error: {e}')
